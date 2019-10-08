@@ -1,0 +1,7 @@
+MongoDB:
+  Host: localhost
+  User: mongoadmin
+  Password: secret
+
+Encrypt:
+  Secret: my-secret
