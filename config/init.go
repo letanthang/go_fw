@@ -8,10 +8,10 @@ import (
 
 type Schema struct {
 	Mongo struct {
-		Host     string
-		Username string
-		Password string
-	}
+		Host     string `mapstructure:"Host"`
+		Username string `mapstructure:"User"`
+		Password string `mapstructure:"Password"`
+	} `mapstructure:"MongoDB"`
 
 	Encryption struct {
 		JWTSecret string
@@ -27,5 +27,9 @@ func init() {
 	err := viper.ReadInConfig()     // Find and read the config file
 	if err != nil {                 // Handle errors reading the config file
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+	}
+	err = viper.Unmarshal(&Config)
+	if err != nil {
+		panic(fmt.Errorf("unable to decode into struct, %v\n", err))
 	}
 }
