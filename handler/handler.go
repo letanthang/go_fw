@@ -1,10 +1,11 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo"
-	"github.com/letanthang/go_fw/types"
+	"github.com/letanthang/go_fw/db"
 )
 
 func CheckHealth(c echo.Context) error {
@@ -12,13 +13,17 @@ func CheckHealth(c echo.Context) error {
 }
 
 func GetAllStudent(c echo.Context) error {
-	aStudent := types.Student{ID: 1, FirstName: "Thai", LastName: "Le", Age: 80}
-	bStudent := types.Student{ID: 2, FirstName: "Van", LastName: "Nguyen", Age: 90}
-	cStudent := types.Student{ID: 3, FirstName: "Cuong", LastName: "Nguyen", Age: 50}
-	dStudent := types.Student{ID: 4, FirstName: "Phat", LastName: "Le", Age: 100}
+	// aStudent := types.Student{ID: 1, FirstName: "Thai", LastName: "Le", Age: 80}
+	// bStudent := types.Student{ID: 2, FirstName: "Van", LastName: "Nguyen", Age: 90}
+	// cStudent := types.Student{ID: 3, FirstName: "Cuong", LastName: "Nguyen", Age: 50}
+	// dStudent := types.Student{ID: 4, FirstName: "Phat", LastName: "Le", Age: 100}
 
-	result := []types.Student{aStudent, bStudent, cStudent, dStudent}
+	// result := []types.Student{aStudent, bStudent, cStudent, dStudent}
 
 	// return c.String(http.StatusOK, "OK")
+	result, err := db.GetAllStudent()
+	if err != nil {
+		fmt.Println(err)
+	}
 	return c.JSON(http.StatusOK, result)
 }
